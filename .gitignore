@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+*.log
+gurobi.log
+data/raw/*
+!data/raw/.gitkeep
+results/new/

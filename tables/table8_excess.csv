@@ -1,0 +1,7 @@
+allocation,excess_2023,coalition_2023,excess_2024,coalition_2024
+By rated power,469.335,"(8, 8, 0)",302.831,"(8, 8, 0)"
+By band supplied,349.381,"(8, 8, 0)",198.644,"(8, 8, 0)"
+Reserve floor,869.784,"(8, 0, 0)",796.12,"(8, 0, 0)"
+Pass-through,0.008,"(8, 8, 3)",-0.01,"(8, 8, 2)"
+Shapley value,27.5,"(8, 0, 0)",26.3,"(8, 0, 0)"
+Nucleolus (least-core value),-0.032,several,-0.035,several

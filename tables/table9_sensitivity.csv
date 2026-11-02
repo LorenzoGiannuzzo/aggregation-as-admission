@@ -1,0 +1,22 @@
+variant,value_of_aggregation_2023,value_of_admission_2023,units_below_2023,value_of_aggregation_2024,value_of_admission_2024,units_below_2024
+Reference,1737.9 (+40.7%),301.5,0/0/0,1464.2 (+35.7%),269.4,0/0/0
+Minimum bid of 0.5 MW,117.5 (+2.0%),7.6,16/16/0,84.8 (+1.5%),8.1,16/16/0
+Minimum bid of 0.25 MW,22.1 (+0.4%),1.4,16/16/0,18.0 (+0.3%),1.5,16/16/0
+Aggregate offer in whole MW,1987.8 (+49.9%),301.5,0/0/0,1734.0 (+45.6%),269.4,0/0/0
+Symmetric FCR,1944.2 (+49.8%),295.1,0/0/0,1541.7 (+40.4%),259.0,0/4/0
+"Symmetric FCR price of 25 EUR/(MW h), 12.5 per direction",1767.4 (+51.7%),293.9,0/0/0,1359.9 (+43.7%),239.7,0/0/0
+"Symmetric FCR price of 10 EUR/(MW h), 5 per direction",1848.7 (+58.4%),292.7,0/0/0,1371.0 (+49.4%),233.2,0/0/0
+No FCR,1907.8 (+61.4%),292.7,0/0/0,1417.9 (+52.7%),232.7,0/0/0
+FCR price falling to zero at 30 MW,1355.3 (+33.3%),301.5,0/0/4,785.3 (+20.3%),269.4,8/4/4
+aFRR capacity price x 0.5,1180.9 (+31.4%),220.3,0/0/0,1048.4 (+28.9%),205.6,0/0/0
+aFRR capacity price x 1.5,2368.2 (+47.9%),401.8,0/0/0,1910.2 (+40.5%),345.4,0/0/0
+No capacity price (energy only),593.4 (+40.6%),92.2,0/4/0,390.2 (+33.6%),65.4,0/4/0
+"Historical regime, UVAM at 20 kEUR/(MW year)",716.2 (+45.3%),92.2,0/4/0,503.2 (+38.6%),65.4,0/4/0
+"Historical regime, UVAM at 30 kEUR/(MW year)",787.7 (+46.6%),92.2,0/4/0,576.0 (+40.8%),65.4,0/4/0
+aFRR and mFRR award probability x 0.5,882.0 (+24.8%),183.6,0/0/0,849.3 (+24.3%),181.2,0/0/0
+aFRR and mFRR award probability x 0.25,687.9 (+20.1%),157.8,4/0/0,686.4 (+20.4%),158.6,4/4/0
+Replacement cost of 150 EUR/kWh,1727.7 (+41.9%),298.8,0/0/0,1452.2 (+36.7%),267.1,0/0/0
+Replacement cost of 25 EUR/kWh,1746.3 (+38.7%),303.7,0/0/0,1476.1 (+34.1%),271.4,0/0/0
+FCR activation of 0.024 per direction (+-10 mHz deadband),1746.0 (+40.8%),302.1,0/0/0,1475.0 (+35.9%),270.3,0/0/0
+"Persistence forecast, previous day",1770.6 (+43.1%),304.4,0/0/0,1487.4 (+37.3%),271.6,0/0/0
+"Persistence forecast, previous week",1766.6 (+43.2%),302.8,0/0/0,1486.0 (+37.3%),270.0,0/0/0
