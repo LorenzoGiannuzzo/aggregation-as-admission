@@ -2,7 +2,7 @@
 
 Code, processed inputs and results of the paper
 
-> L. Giannuzzo, D. S. Schiera, F. D. Minuto, A. Lanzini, *Aggregation as Admission to Reserve Markets: Value and Stable Revenue Sharing of Pooled Heterogeneous Battery Storage Under a Minimum Bid Size*, submitted to *Sustainable Energy Technologies and Assessments*.
+> L. Giannuzzo, D. S. Schiera, F. D. Minuto, A. Lanzini, *Aggregation as Admission to Reserve Markets: Value and Stable Revenue Sharing of Pooled Heterogeneous Battery Storage Under a Minimum Bid Size*, manuscript submitted for publication.
 
 The paper schedules twenty batteries of three sizes (8 × 0.5 MW / 4 h, 8 × 1.0 MW / 2 h, 4 × 2.5 MW / 1 h) on the Italian day-ahead market and on six directional reserve products (FCR, aFRR and mFRR, upward and downward) for 2023 and 2024, with a minimum bid of 1 MW applied either to the offer of each unit (standalone) or to the combined offer of the portfolio (aggregated). It then values the cooperative game of the twenty units exactly, on all class compositions and every day of both years, and tests four allocation rules, the Shapley value and the nucleolus against the core.
 
@@ -22,7 +22,7 @@ data/
   raw/                 GME downloads, to be added by the user (see data/README.md)
   processed/           hourly inputs of the reference runs, 2023 and 2024
 results/               annual results used in the paper (see below)
-figures/               scripts that rebuild Figs. 2 to 6 from results/
+figures/               scripts that rebuild Figs. 2 to 6 and Figs. S1 and S2 from results/ and data/processed/
 tables/                script that rebuilds the values of Tables 4 to 10 from results/
 ```
 
@@ -47,7 +47,8 @@ cd figures
 python fig2_fig3.py        # Fig. 2 and Fig. 3
 python fig4.py             # Fig. 4
 python fig5.py 2023        # Fig. 5
-python fig5.py 2024        # 2024 map of the Supplementary Material
+python fig5.py 2024        # Fig. S2 of the Supplementary Material (2024 map)
+python figS1_inputs.py     # Fig. S1 of the Supplementary Material (hourly inputs)
 python fig6.py             # Fig. 6
 cd ../tables
 python make_tables.py      # Tables 4 to 10, one CSV each
@@ -62,7 +63,8 @@ python make_tables.py      # Tables 4 to 10, one CSV each
 | Fig. 5 | `figures/fig5.py` | `core_width_small_<year>.json` |
 | Table 9 | `tables/make_tables.py` | `scenarios.csv` |
 | Table 10, Fig. 6 | `tables/make_tables.py`, `figures/fig6.py` | `scenarios.csv` (rows `b0_preliminary` to `b9_reference`) |
-| Monte Carlo replay (Section 4.4) | `src/postprocess.py` | `post_ref.json` (keys `replay_*`) |
+| Monte Carlo replay (Section 4.4, Table S4) | `src/postprocess.py` | `post_ref.json` (keys `replay_*`) |
+| Figs. S1 and S2 | `figures/figS1_inputs.py`, `figures/fig5.py 2024` | `data/processed/`, `core_width_small_2024.json` |
 
 ## Rerunning the experiments
 

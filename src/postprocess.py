@@ -206,7 +206,7 @@ def replay(fn, n_samples=200, k_pen=1.5, fcr_phi=0.088, pool=False, seed=0, expe
                     # an awarded band delivers its expected activated energy (only the award is random)
                     act = {k: (float(beta[day, kidx[k], t]) if (aw[k] and not k.startswith("fcr")) else float(bool(aw[k])))
                            for k in keys}
-                e_up = np.zeros(N); e_dn = np.zeros(N)
+                e_up = np.zeros(N); e_dn = np.zeros(N); v_up = np.zeros(N); v_dn = np.zeros(N)
                 if expected:
                     # check of the replay itself: awards and activations at their expected values reproduce the plan
                     aw = {k: alpha[day, kidx[k], t] for k in keys}
@@ -220,10 +220,10 @@ def replay(fn, n_samples=200, k_pen=1.5, fcr_phi=0.088, pool=False, seed=0, expe
                         # restoration energy at its price, FCR energy at the day-ahead price
                         p_e = lam[day, t] if k.startswith("fcr") else cen[day, j, t]
                         if k in up:
-                            e_up += e
+                            e_up += e; v_up += p_e * e
                             rev += p_e * e
                         else:
-                            e_dn += e
+                            e_dn += e; v_dn += p_e * e
                             rev -= p_e * e
                 # energy flows of the hour, day-ahead schedule included
                 out_e = Pdis[day, :, t] + e_up       # delivered
@@ -247,6 +247,11 @@ def replay(fn, n_samples=200, k_pen=1.5, fcr_phi=0.088, pool=False, seed=0, expe
                 miss_dn = hi_v / eta                     # energy not absorbed from the grid
                 p_pen = k_pen * max([lam[day, t]] + [cen[day, kidx[k], t] for k in keys if not k.startswith("fcr")])
                 pen += (miss_up + miss_dn) * p_pen
+                #Lorenzo Giannuzzo: activated energy that is not delivered (absorbed) is not paid (not charged), at the
+                # mean energy price of the activations of the hour, the shortfall being attributed first to the activations
+                p_up = np.divide(v_up, e_up, out=np.zeros(N), where=e_up > 0); p_dn = np.divide(v_dn, e_dn, out=np.zeros(N), where=e_dn > 0)
+                rev -= np.minimum(miss_up, e_up) * p_up
+                rev += np.minimum(miss_dn, e_dn) * p_dn
                 if np.any(miss_up + miss_dn > 1e-9):
                     short_hours[s] += 1
                 short_mwh[s] += (miss_up + miss_dn).sum()

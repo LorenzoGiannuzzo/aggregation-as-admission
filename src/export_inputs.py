@@ -13,6 +13,8 @@ from datetime import date, timedelta
 
 import numpy as np
 
+FCR_ACTIVATION = 0.088 / 2  # expected FCR activation per direction entering the model (fcr_phi of scheduling_milp.py, halved)
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -35,8 +37,13 @@ def main():
             for day in range(d["prices"].shape[0]):
                 for t in range(24):
                     row = [(date(y, 1, 1) + timedelta(days=day)).isoformat(), t, round(float(d["prices"][day, t]), 4)]
-                    for j in range(len(keys)):
-                        row += [round(float(d[x][day, j, t]), 6) for x in ("alpha", "beta", "ccap", "cen")]
+                    for j, k in enumerate(keys):
+                        vals = [float(d[x][day, j, t]) for x in ("alpha", "beta", "ccap", "cen")]
+                        #Lorenzo Giannuzzo: FCR enters the model with the activation fcr_phi/2 per direction and no energy payment,
+                        # its energy being valued through the state of charge at the day-ahead price
+                        if k.startswith("fcr"):
+                            vals[1], vals[3] = FCR_ACTIVATION, 0.0
+                        row += [round(v, 6) for v in vals]
                     w.writerow(row)
         print(f"{y} -> {fn}")
 

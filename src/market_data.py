@@ -269,15 +269,15 @@ class ServiceCalibration:
     `build_yearly_service_catalog`. Typically these come from the MSD
     ex-ante data via `load_msd_from_terna_xlsx`.
     """
-    # Capacity prices (EUR per MW per hour) — calibrated to 2022-2024 benchmarks
+    # Capacity prices (EUR per MW per hour), calibrated to 2022-2024 benchmarks
     fcr_capacity_price: float = 50.0       # European FCR Cooperation 2024 avg
     afrr_capacity_price: float = 25.0      # Italian aFRR benchmark post-PICASSO
     mfrr_capacity_price: float = 12.0      # European mFRR/MARI benchmark
-    # Energy prices for activated capacity (EUR per MWh) — calibrated
+    # Energy prices for activated capacity (EUR per MWh), calibrated
     fcr_energy_price: float = 0.0          # remunerated on capacity alone
     afrr_energy_price: float = 250.0       # Italian 2022 vol-weighted ~412; conservative
     mfrr_energy_price: float = 180.0       # European mFRR 2022-2024 benchmark
-    # Baseline activation probabilities — Terna Report on Balancing 2022-23
+    # Baseline activation probabilities, Terna Report on Balancing 2022-23
     fcr_activation_probability: float = 0.10
     afrr_activation_probability: float = 0.30
     mfrr_activation_probability: float = 0.20
@@ -556,18 +556,9 @@ def msd_conditioned_profiles(xlsx_paths, year=None, min_cell_samples: int = 20):
             s = sub[sub['hour'] == h]
             if len(s) == 0:
                 continue
-            # Direction mapping: see the long note in msd_hourly_profiles.
-            # "offerte di VENDITA" are the UPWARD movement (the provider sells
-            # energy to Terna and is paid), "offerte di ACQUISTO" are the
-            # DOWNWARD one (the provider buys energy back and pays). Verified
-            # on 2023 northern-zone data against a 177 EUR/MWh mean PUN:
-            # Vendita averages 241 (a premium, hence upward) and Acquisto 111
-            # (a discount, hence downward).
-            #
-            # THIS is the function the pipeline actually calls — the log line
-            # reads "MSD profiles (CONDITIONED ...)". Correcting only
-            # msd_hourly_profiles left the results bit-identical, which is how
-            # the duplication was found.
+            # Direction mapping: accepted offers of sale ("offerte di vendita") are the
+            # upward movement (the provider sells energy and is paid), accepted offers of
+            # purchase ("offerte di acquisto") the downward one (the provider buys energy back).
             up_r[h] = float((s['p_sell'] > 0).mean())
             au = s[s['p_sell'] > 0]
             up_p[h] = float(au['p_sell'].mean()) if len(au) else 0.0
