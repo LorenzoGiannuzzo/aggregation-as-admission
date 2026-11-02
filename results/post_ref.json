@@ -6,7 +6,7 @@
    "large": 547.9082534751412
   },
   "core": {
-   "least_core_margin_keur": 0.032174989523854135,
+   "least_core_margin_keur": 0.03217498952429742,
    "core_nonempty": true,
    "small_interval": [
     175.0107833843045,
@@ -960,32 +960,32 @@
     "shortfall_hours_per_year": 0.0
    },
    "unit_level": {
-    "real_p05_total": 3420588.2367902943,
-    "real_total_mean": 3584612.5760080325,
+    "real_p05_total": 3248169.6662057666,
+    "real_total_mean": 3396602.462286108,
     "plan_total": 6331094.200080417,
     "penalty_mean": 2782451.326890773,
     "shortfall_mwh_per_year": 9055.386423747108,
     "shortfall_hours_per_year": 2876.84
    },
    "unit_level_mean_activation": {
-    "real_p05_total": 5588260.964095422,
-    "real_total_mean": 5671358.085828703,
+    "real_p05_total": 5539879.198742373,
+    "real_total_mean": 5617446.893633242,
     "plan_total": 6331094.200080417,
     "penalty_mean": 702194.5125716531,
     "shortfall_mwh_per_year": 2235.105278622238,
     "shortfall_hours_per_year": 1308.82
    },
    "pool_level": {
-    "real_p05_total": 3674229.859866019,
-    "real_total_mean": 3842981.1957222773,
+    "real_p05_total": 3514419.461738399,
+    "real_total_mean": 3675740.8711138787,
     "plan_total": 6331094.200080417,
     "penalty_mean": 2519841.5069758175,
     "shortfall_mwh_per_year": 8183.245546823237,
     "shortfall_hours_per_year": 1862.52
    },
    "pool_level_mean_activation": {
-    "real_p05_total": 5700173.062972726,
-    "real_total_mean": 5774005.100791054,
+    "real_p05_total": 5651085.194096166,
+    "real_total_mean": 5731481.380243237,
     "plan_total": 6331094.200080417,
     "penalty_mean": 589053.2592396323,
     "shortfall_mwh_per_year": 1865.7480497486117,
@@ -1028,16 +1028,16 @@
     "shortfall_hours_per_year": 1.0
    },
    "unit_level": {
-    "real_p05_total": 106822.53234966974,
-    "real_total_mean": 114062.8293578271,
+    "real_p05_total": 102572.57501478336,
+    "real_total_mean": 110578.82135946842,
     "plan_total": 262286.7621170904,
     "penalty_mean": 152220.62810249673,
     "shortfall_mwh_per_year": 490.03728839883956,
     "shortfall_hours_per_year": 1728.36
    },
    "unit_level_mean_activation": {
-    "real_p05_total": 225898.16029343283,
-    "real_total_mean": 230441.63854299637,
+    "real_p05_total": 225674.70024473433,
+    "real_total_mean": 230263.41808559038,
     "plan_total": 262286.7621170904,
     "penalty_mean": 36054.722289529556,
     "shortfall_mwh_per_year": 112.58481370434778,
@@ -1054,16 +1054,16 @@
     "shortfall_hours_per_year": 1.0
    },
    "unit_level": {
-    "real_p05_total": 352759.1450800597,
-    "real_total_mean": 366585.7603842925,
+    "real_p05_total": 358792.1312538952,
+    "real_total_mean": 369875.834089442,
     "plan_total": 552197.5103847301,
     "penalty_mean": 194505.12051110773,
     "shortfall_mwh_per_year": 620.9147074608546,
     "shortfall_hours_per_year": 2333.39
    },
    "unit_level_mean_activation": {
-    "real_p05_total": 512548.33224365825,
-    "real_total_mean": 520739.1043157703,
+    "real_p05_total": 512409.2412307301,
+    "real_total_mean": 520689.9778022888,
     "plan_total": 552197.5103847301,
     "penalty_mean": 38950.779936002196,
     "shortfall_mwh_per_year": 119.57627717188197,
@@ -1078,7 +1078,7 @@
    "large": 529.9358128404932
   },
   "core": {
-   "least_core_margin_keur": 0.035333253748864916,
+   "least_core_margin_keur": 0.03533325375150889,
    "core_nonempty": true,
    "small_interval": [
     155.32737358939963,
@@ -1093,9 +1093,9 @@
     526.1018118307445
    ],
    "nucleolus_keur": {
-    "small": 155.3727989600805,
-    "medium": 277.03496620972084,
-    "large": 526.0736120524346
+    "small": 155.37279896008224,
+    "medium": 277.03496620971987,
+    "large": 526.0736120524341
    }
   },
   "unit_core_projection_keur": {
@@ -2032,32 +2032,32 @@
     "shortfall_hours_per_year": 0.0
    },
    "unit_level": {
-    "real_p05_total": 3782821.19007108,
-    "real_total_mean": 3923871.9038035534,
+    "real_p05_total": 3720719.548975073,
+    "real_total_mean": 3844236.683979103,
     "plan_total": 5876794.515523339,
     "penalty_mean": 2017618.284111631,
     "shortfall_mwh_per_year": 7426.653953555984,
     "shortfall_hours_per_year": 2450.05
    },
    "unit_level_mean_activation": {
-    "real_p05_total": 5480125.59219786,
-    "real_total_mean": 5540879.293360667,
+    "real_p05_total": 5449643.02436025,
+    "real_total_mean": 5510412.375528799,
     "plan_total": 5876794.515523339,
     "penalty_mean": 373814.75350675656,
     "shortfall_mwh_per_year": 1350.756675511391,
     "shortfall_hours_per_year": 869.38
    },
    "pool_level": {
-    "real_p05_total": 3977285.100086173,
-    "real_total_mean": 4127155.6510710977,
+    "real_p05_total": 3922940.349572757,
+    "real_total_mean": 4055459.1560771703,
     "plan_total": 5876794.515523339,
     "penalty_mean": 1811275.0263564372,
     "shortfall_mwh_per_year": 6651.602040121894,
     "shortfall_hours_per_year": 1559.15
    },
    "pool_level_mean_activation": {
-    "real_p05_total": 5548595.105698107,
-    "real_total_mean": 5610010.981050215,
+    "real_p05_total": 5523970.045119801,
+    "real_total_mean": 5587102.7168530775,
     "plan_total": 5876794.515523339,
     "penalty_mean": 293804.68055799225,
     "shortfall_mwh_per_year": 1055.291841484818,
@@ -2100,16 +2100,16 @@
     "shortfall_hours_per_year": 1.0
    },
    "unit_level": {
-    "real_p05_total": 131988.7865239163,
-    "real_total_mean": 139151.97771996935,
+    "real_p05_total": 133916.01831878762,
+    "real_total_mean": 139388.74391331032,
     "plan_total": 249750.20940887547,
     "penalty_mean": 116377.66604531802,
     "shortfall_mwh_per_year": 427.86383141419674,
     "shortfall_hours_per_year": 1555.05
    },
    "unit_level_mean_activation": {
-    "real_p05_total": 226861.9036268133,
-    "real_total_mean": 230290.98699045856,
+    "real_p05_total": 226805.65661890586,
+    "real_total_mean": 230275.96844736754,
     "plan_total": 249750.20940887547,
     "penalty_mean": 23195.05875246892,
     "shortfall_mwh_per_year": 83.02204619355996,
@@ -2126,16 +2126,16 @@
     "shortfall_hours_per_year": 0.0
    },
    "unit_level": {
-    "real_p05_total": 381409.4575279734,
-    "real_total_mean": 392906.7507550391,
+    "real_p05_total": 388199.80500699923,
+    "real_total_mean": 397453.9873398468,
     "plan_total": 538323.7429715113,
     "penalty_mean": 155338.75255107862,
     "shortfall_mwh_per_year": 560.2900006457431,
     "shortfall_hours_per_year": 1984.77
    },
    "unit_level_mean_activation": {
-    "real_p05_total": 511558.7654807138,
-    "real_total_mean": 518207.85567256337,
+    "real_p05_total": 511498.38578724745,
+    "real_total_mean": 518103.6721459172,
     "plan_total": 538323.7429715113,
     "penalty_mean": 25554.040442190348,
     "shortfall_mwh_per_year": 89.57853979615706,
