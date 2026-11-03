@@ -39,10 +39,10 @@ def main():
                     row = [(date(y, 1, 1) + timedelta(days=day)).isoformat(), t, round(float(d["prices"][day, t]), 4)]
                     for j, k in enumerate(keys):
                         vals = [float(d[x][day, j, t]) for x in ("alpha", "beta", "ccap", "cen")]
-                        #Lorenzo Giannuzzo: FCR enters the model with the activation fcr_phi/2 per direction and no energy payment,
-                        # its energy being valued through the state of charge at the day-ahead price
+                        #Lorenzo Giannuzzo: FCR enters the model with the activation fcr_phi/2 per direction, its expected
+                        # energy being settled at the day-ahead price of the hour (fcr_e of scheduling_milp.py)
                         if k.startswith("fcr"):
-                            vals[1], vals[3] = FCR_ACTIVATION, 0.0
+                            vals[1], vals[3] = FCR_ACTIVATION, float(d["prices"][day, t])
                         row += [round(v, 6) for v in vals]
                     w.writerow(row)
         print(f"{y} -> {fn}")

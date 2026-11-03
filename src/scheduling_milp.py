@@ -82,7 +82,7 @@ class ModelOptions:
     headroom: bool = True            # separate upward / downward headroom (else one budget for all)
     direction_mutex: bool = False    # one direction per restoration product and hour, per unit
     fcr_directional: bool = True
-    fcr_phi: float = 0.088           # mean absolute normalized FCR activation: E|df|/200 mHz for a normal df with sd 22 mHz (ENTSO-E ALFC report 2024), no deadband
+    fcr_phi: float = 0.088           # mean absolute normalized FCR activation: E|df|/200 mHz for a normal df with an assumed sd of 22 mHz, no deadband
     tied_activation: bool = True     # aFRR / mFRR activated energy = band
     sustain_eta: bool = True         # sustain energy divided (up) or multiplied (down) by eta
     sustain_end_of_hour: bool = True

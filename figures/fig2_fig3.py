@@ -47,11 +47,11 @@ NAME = {"small": "Small (0.5 MW, 2 MWh)", "medium": "Medium (1.0 MW, 2 MWh)", "l
 D = {y: load(y) for y in (2023, 2024)}
 
 #Lorenzo Giannuzzo: Fig. 2, revenue and cost components of the portfolio, standalone (hatched) against aggregated (solid), stacked by class
-COMP = [("FCR", lambda r, a, d: r[0] + r[1]), ("aFRR\nUp", lambda r, a, d: r[2]), ("aFRR\nDown", lambda r, a, d: r[3]),
-        ("Arbitrage", lambda r, a, d: a), ("Degra-\ndation", lambda r, a, d: -d)]
+COMP = [("FCR", lambda r, a, d: r[0] + r[1]), ("aFRR\nUpward", lambda r, a, d: r[2]), ("aFRR\nDownward", lambda r, a, d: r[3]),
+        ("Arbitrage", lambda r, a, d: a), ("Degradation", lambda r, a, d: -d)]
 fig, axs = plt.subplots(1, 2, figsize=(W, 3.5), sharey=True, gridspec_kw=dict(wspace=0.08))
 for ax, y in zip(axs, (2023, 2024)):
-    d = D[y]; x = np.arange(len(COMP)); w = 0.36
+    d = D[y]; x = np.array([0.0, 1.0, 2.0, 3.0, 4.15]); w = 0.36
     for side, off in (("sa", -w / 2), ("ag", w / 2)):
         pos = np.zeros(len(COMP)); neg = np.zeros(len(COMP))
         for c in CL:
@@ -66,8 +66,8 @@ for ax, y in zip(axs, (2023, 2024)):
         else: tot_ag = pos + neg
     for k in range(len(COMP)):
         dv = tot_ag[k] - tot_sa[k]; top = max(tot_sa[k], tot_ag[k], 0)
-        ax.text(x[k], top + 70, f"{dv:+.0f}".replace("-", "−"), ha="center", va="bottom", fontsize=7.5, fontweight="bold")
-    ax.axhline(0, color="black", lw=0.8); ax.set_xticks(x, [n for n, _ in COMP], fontsize=7); ax.grid(axis="y", alpha=0.3, zorder=0)
+        ax.text(x[k], top + 70, f"{dv:+.1f}".replace("-", "−"), ha="center", va="bottom", fontsize=6.5, fontweight="bold")
+    ax.axhline(0, color="black", lw=0.8); ax.set_xticks(x, [n for n, _ in COMP], fontsize=6); ax.grid(axis="y", alpha=0.3, zorder=0)
     ax.set_title(f"({'a' if y == 2023 else 'b'}) {y}")
     ax.text(0.98, 0.97, f"Value of Aggregation\n{d['r'].delta_keur:.0f} k€ ({d['r'].delta_pct:.1f}%)", transform=ax.transAxes, ha="right", va="top", fontsize=7.5,
             bbox=dict(boxstyle="square,pad=0.3", facecolor="white", edgecolor="black", lw=0.6))

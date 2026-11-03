@@ -1,0 +1,17 @@
+{
+ "base": {
+  "standalone_keur": 4099.364079450433,
+  "aggregated_keur": 5563.554272947067,
+  "delta_keur": 1464.1901934966352,
+  "delta_pct": 35.71749581444659,
+  "value_of_admission_keur_per_mw_year": 269.42979974742957
+ },
+ "fix": {
+  "standalone_keur": 4096.796310808834,
+  "aggregated_keur": 5550.015358790476,
+  "delta_keur": 1453.2190479816413,
+  "delta_pct": 35.472084471164024,
+  "value_of_admission_keur_per_mw_year": 267.989197081273
+ },
+ "fallback_hours": 52
+}

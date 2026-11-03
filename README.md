@@ -2,7 +2,7 @@
 
 Code, processed inputs and results of the paper
 
-> L. Giannuzzo, D. S. Schiera, F. D. Minuto, A. Lanzini, *Aggregation as Admission to Reserve Markets: Value and Stable Revenue Sharing of Pooled Heterogeneous Battery Storage Under a Minimum Bid Size*, manuscript submitted for publication.
+> L. Giannuzzo, D. S. Schiera, F. D. Minuto, A. Lanzini, *Aggregation as Admission to Reserve Markets: Value and Stable Revenue Sharing of Pooled Heterogeneous Battery Storage Under a Minimum Bid Size*, manuscript in preparation.
 
 The paper schedules twenty batteries of three sizes (8 × 0.5 MW / 4 h, 8 × 1.0 MW / 2 h, 4 × 2.5 MW / 1 h) on the Italian day-ahead market and on six directional reserve products (FCR, aFRR and mFRR, upward and downward) for 2023 and 2024, with a minimum bid of 1 MW applied either to the offer of each unit (standalone) or to the combined offer of the portfolio (aggregated). It then values the cooperative game of the twenty units exactly, on all class compositions and every day of both years, and tests four allocation rules, the Shapley value and the nucleolus against the core.
 
@@ -16,6 +16,7 @@ src/
   core_width.py        width of the core of every composition for one small unit (Fig. 5)
   collect_results.py   merges the timestamped summaries into results/scenarios.csv and results/durations.csv
   export_inputs.py     hourly model inputs to data/processed/
+  check_fallback_2024.py  2024 reference without the default upward profile in the 52 hours with no upward acceptance
   market_data.py       GME day-ahead prices and MSD-based reserve catalog
   market_products.py   reserve product definitions
 data/
@@ -116,6 +117,7 @@ All daily problems are solved to a relative gap of 0.01% within 300 s. The ident
 | `units_<scenario>_<year>.json` | Per-unit standalone and threshold-free values, allocations under the four rules, aggregated revenue and band by unit and product |
 | `game_ref_<year>.json` | Annual value of every class composition of the game (EUR), days solved, tolerance, threshold-free value per unit |
 | `game_ref_<year>_days.jsonl.gz` | Daily values of every composition (compressed; decompress to resume a run) |
+| `fallback_2024.json` | 2024 reference with and without the default upward profile in the 52 hours with no upward acceptance (Section 2.1) |
 | `post_ref.json` | Shapley value, nucleolus, core and single-unit core projections, largest excess of each rule, fixed-cost bounds, Monte Carlo replay |
 | `core_width_small_<year>.json` | Core interval of one small unit in every composition, in kEUR |
 | `comps_fcrdepth_<year>.json` | Class pools and their unions under the price-responsive FCR |

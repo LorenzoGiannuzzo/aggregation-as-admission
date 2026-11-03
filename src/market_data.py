@@ -269,15 +269,15 @@ class ServiceCalibration:
     `build_yearly_service_catalog`. Typically these come from the MSD
     ex-ante data via `load_msd_from_terna_xlsx`.
     """
-    # Capacity prices (EUR per MW per hour), calibrated to 2022-2024 benchmarks
-    fcr_capacity_price: float = 50.0       # European FCR Cooperation 2024 avg
-    afrr_capacity_price: float = 25.0      # Italian aFRR benchmark post-PICASSO
-    mfrr_capacity_price: float = 12.0      # European mFRR/MARI benchmark
-    # Energy prices for activated capacity (EUR per MWh), calibrated
-    fcr_energy_price: float = 0.0          # remunerated on capacity alone
-    afrr_energy_price: float = 250.0       # Italian 2022 vol-weighted ~412; conservative
-    mfrr_energy_price: float = 180.0       # European mFRR 2022-2024 benchmark
-    # Baseline activation probabilities, Terna Report on Balancing 2022-23
+    # Capacity prices (EUR per MW per hour), assumed prospective prices (Section 2.1 of the paper)
+    fcr_capacity_price: float = 50.0       # assumed symmetric FCR price, half per direction
+    afrr_capacity_price: float = 25.0      # assumed aFRR capacity price
+    mfrr_capacity_price: float = 12.0      # assumed mFRR capacity price
+    # Default energy prices for activated capacity (EUR per MWh), replaced by the MSD records where available
+    fcr_energy_price: float = 0.0          # FCR energy settled at the day-ahead price in scheduling_milp.py
+    afrr_energy_price: float = 250.0       # default profile
+    mfrr_energy_price: float = 180.0       # default profile
+    # Assumed expected activations of the awarded band
     fcr_activation_probability: float = 0.10
     afrr_activation_probability: float = 0.30
     mfrr_activation_probability: float = 0.20
