@@ -35,7 +35,7 @@ for ax, yr in zip(axs, (2023, 2024)):
     ax.set_xlim(0, 2300); ax.grid(axis="x", alpha=0.3, zorder=0); ax.set_title(f"({'a' if yr == 2023 else 'b'}) {yr}")
     ax.set_xlabel("Value of Aggregation [k€]")
 axs[0].set_yticks(y, STEPS)
-h = [Patch(facecolor="#084A91", edgecolor="black", lw=0.5, label="Preliminary and Reference"), Patch(facecolor="#F4A340", edgecolor="black", lw=0.5, label="Increase"),
+h = [Patch(facecolor="#084A91", edgecolor="black", lw=0.5, label="Preliminary & Reference"), Patch(facecolor="#F4A340", edgecolor="black", lw=0.5, label="Increase"),
      Patch(facecolor="#5B9BD5", edgecolor="black", lw=0.5, label="Decrease")]
 lg = fig.legend(handles=h, loc="lower center", bbox_to_anchor=(0.55, 0.98), ncol=3, frameon=True, fancybox=False, edgecolor="black", framealpha=1)
 lg.get_frame().set_linewidth(0.7)

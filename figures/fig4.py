@@ -86,7 +86,7 @@ a1.set_ylabel("Difference from\nThreshold-Free Value [k€]"); a1.grid(axis="y",
 lg = a1.legend(loc="lower center", bbox_to_anchor=(0.5, 1.07), ncol=5, frameon=True, fancybox=False, edgecolor="black", framealpha=1,
                handlelength=1.6, columnspacing=1.0); lg.get_frame().set_linewidth(0.7)
 sc = d['scarce']; gS = d['g']['small']; saS = d['sa']['small']
-rows = [("One Small and\nOne Large Unit", sc['1s1l']), ("One Small and\nTwo Large Units", sc['1s2l'])]
+rows = [("One Small &\nOne Large Unit", sc['1s1l']), ("One Small &\nTwo Large Units", sc['1s2l'])]
 CORE = "#FABE78"; SHC = "#9B4DDB"
 xl2 = (0, 200); xl3 = (140, 185)
 for ax_, xl in ((a2, xl2), (a3, xl3)):

@@ -21,8 +21,8 @@ def width(s, m, l):
 fig, axs = plt.subplots(1, 2, figsize=(W, 3.9), gridspec_kw=dict(width_ratios=[1.2, 1.3], wspace=0.25))
 norm = LogNorm(vmin=0.8, vmax=300); from matplotlib.colors import ListedColormap
 cmap = ListedColormap(matplotlib.colormaps["magma_r"](np.linspace(0.0, 0.82, 256)))
-grids = [("(a) Small and Large Units", [(s, 0, l) for l in range(5) for s in range(1, 9)], 5, "Large Units [-]"),
-         ("(b) Small and Medium Units", [(s, m, 0) for m in range(9) for s in range(1, 9)], 9, "Medium Units [-]")]
+grids = [("(a) Small & Large Units", [(s, 0, l) for l in range(5) for s in range(1, 9)], 5, "Large Units [-]"),
+         ("(b) Small & Medium Units", [(s, m, 0) for m in range(9) for s in range(1, 9)], 9, "Medium Units [-]")]
 for ax, (title, cells, ny, ylab) in zip(axs, grids):
     Z = np.full((ny, 8), np.nan)
     for (s, m, l) in cells:
