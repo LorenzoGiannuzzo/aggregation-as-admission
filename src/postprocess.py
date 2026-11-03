@@ -330,7 +330,7 @@ def main():
             for name in (f"schedules_{a.scenario}_{year}.npz",) + tuple(f"schedules_{a.scenario}_{year}_standalone_{l}.npz" for l in LAB):
                 fn = os.path.join(a.outdir, name)
                 if os.path.exists(fn):
-                    clean = lambda r: {k: v for k, v in r.items() if not isinstance(v, np.ndarray)}
+                    clean = lambda r: {k: (v.tolist() if isinstance(v, np.ndarray) and k in ('plan_eur', 'real_mean_eur') else v) for k, v in r.items() if not isinstance(v, np.ndarray) or k in ('plan_eur', 'real_mean_eur')}
                     entry = dict(check_expected=clean(replay(fn, n_samples=1, expected=True)),
                                  unit_level=clean(replay(fn, n_samples=a.samples)),
                                  unit_level_mean_activation=clean(replay(fn, n_samples=a.samples, act_mode="mean")))
