@@ -28,8 +28,10 @@ ModelOptions(preliminary=True) rebuilds the formulation of the preliminary
 (conference) version of the work, used as the starting point of the bridge.
 
 Optional couplings and market variants: integer bid granularity, a price-
-responsive FCR capacity price (residual demand), and the forward capacity
-product of the UVAM (upward offers in an evening window on working days).
+responsive FCR capacity price (residual demand), the forward capacity
+product of the UVAM (upward offers in an evening window on working days), and
+a margin on the SOC (soc_margin) added to the bounds of the sustain constraints
+in every hour and direction in which a unit holds reserve.
 """
 from __future__ import annotations
 
@@ -96,6 +98,7 @@ class ModelOptions:
     tau: Dict[str, float] = field(default_factory=lambda: {"fcr": 0.25, "afrr": 1.0, "mfrr": 2.0})
     gap: float = 1e-4
     time_limit: float = 300.0
+    soc_margin: float = 0.0          # SOC margin for estimation error, added to the bounds of the sustain constraints in the hours with reserve
     tiebreak_floor: Optional[float] = None   # if set: among schedules earning at least this, the one with the least band
 
 
@@ -281,9 +284,19 @@ def solve_day(units: List[BatteryUnit], prices: Sequence[float], services: Seque
             f_up = (1.0 / u.eta) if o.sustain_eta else 1.0
             f_dn = u.eta if o.sustain_eta else 1.0
             moments = [t, t + 1] if o.sustain_end_of_hour else [t]
+            #Lorenzo Giannuzzo: with a SOC margin, the bounds of the sustain constraints are tightened by the margin in
+            # every hour and direction in which the unit holds reserve, through an indicator of that reserve
+            if o.soc_margin > 0:
+                zu = pulp.LpVariable(f"zu_{i}_{t}", cat="Binary"); zd = pulp.LpVariable(f"zd_{i}_{t}", cat="Binary")
+                prob += up_need <= sum(tau[k] for k in up_keys) * u.p_max * zu
+                prob += dn_need <= sum(tau[k] for k in dn_keys) * u.p_max * zd
+                lo = u.soc_min * u.e_cap + o.soc_margin * u.e_cap * zu
+                hi = u.soc_max * u.e_cap - o.soc_margin * u.e_cap * zd
+            else:
+                lo, hi = u.soc_min * u.e_cap, u.soc_max * u.e_cap
             for m in moments:
-                prob += SOC[(i, m)] * u.e_cap - f_up * up_need >= u.soc_min * u.e_cap, f"SusUp_{i}_{t}_{m}"
-                prob += SOC[(i, m)] * u.e_cap + f_dn * dn_need <= u.soc_max * u.e_cap, f"SusDn_{i}_{t}_{m}"
+                prob += SOC[(i, m)] * u.e_cap - f_up * up_need >= lo, f"SusUp_{i}_{t}_{m}"
+                prob += SOC[(i, m)] * u.e_cap + f_dn * dn_need <= hi, f"SusDn_{i}_{t}_{m}"
 
             if o.direction_mutex:
                 for root in ("afrr", "mfrr"):

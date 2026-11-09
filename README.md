@@ -12,6 +12,7 @@ The paper schedules twenty batteries of three sizes (8 × 0.5 MW / 4 h, 8 × 1.0
 src/
   scheduling_milp.py   daily MILP of a coalition of units under the minimum bid (reference and preliminary formulations, variants)
   experiments.py       scenarios, exact cooperative game, value of admission by duration, compositions, bridge
+  comps_parallel.py    annual value of given compositions with the days solved in parallel processes
   postprocess.py       Shapley value, nucleolus, core, largest excess of each rule, fixed cost, Monte Carlo replay
   core_width.py        width of the core of every composition for one small unit (Fig. 5)
   collect_results.py   merges the timestamped summaries into results/scenarios.csv and results/durations.csv
@@ -89,11 +90,16 @@ python experiments.py --scenarios ref --years 2024 --game --workers 4 --duration
 python experiments.py --scenarios minbid05 minbid025 gran1 fcrsym phi047 fcr25 fcr10 nofcr afrr05 afrr15 energyonly alpha05 alpha025 \
     --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
 python experiments.py --scenarios deg150 deg25 hist hist30 histnouvam fcrdepth persist1 persist7 --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
+python experiments.py --scenarios margin121 margin432 margin955 --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
 python experiments.py --durations-scenarios ref afrr05 afrr15 energyonly hist --durations 1 2 4 --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
 
 # 3. coalitions under the price-responsive FCR and under whole-megawatt offers
 python experiments.py --comps "8,0,0;0,8,0;0,0,4;8,8,0;8,0,4;0,8,4" --comps-scenario fcrdepth --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
-python experiments.py --comps "8,8,3;8,7,4;7,8,4" --comps-scenario gran1 --years 2023 --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
+python experiments.py --comps "8,8,0;7,8,4;8,7,4;8,8,3;8,0,4;8,0,0;0,8,0;0,0,4;2,0,0;1,0,1" --comps-scenario gran1 --years 2023 \
+    --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
+# the same, with the days of each composition solved in parallel (the days are independent under the cyclic SOC)
+python comps_parallel.py --comps "1,0,2;0,8,4" --comps-scenario gran1 --year 2023 --workers 8 --threads 2 \
+    --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
 
 # 4. bridge from the preliminary to the reference formulation (Fig. 6, Table 10)
 python experiments.py --bridge --pun-xlsx $PUN --msd-xlsx $MSD --outdir $OUT
@@ -104,7 +110,7 @@ python postprocess.py --outdir $OUT --years 2023 2024
 python core_width.py --outdir $OUT --years 2023 2024
 ```
 
-On Windows PowerShell, set `$env:MILP_THREADS = "1"`, `$pun = "..\data\raw\20230101_20231231_PUN.xlsx", "..\data\raw\20240101_20241231_PUN.xlsx"` and `$msd = (Get-ChildItem ..\data\raw\EsitiMSD*Nord*.xls* | ForEach-Object FullName)`, and pass `$pun` and `$msd` in the same way. With `--game`, every solved day is appended to `game_ref_<year>_days.jsonl`, so an interrupted run restarts from the missing days. The whole-megawatt runs (`gran1`) reach the time limit of 300 s on most days, about 30 hours per composition and year.
+On Windows PowerShell, set `$env:MILP_THREADS = "1"`, `$pun = "..\data\raw\20230101_20231231_PUN.xlsx", "..\data\raw\20240101_20241231_PUN.xlsx"` and `$msd = (Get-ChildItem ..\data\raw\EsitiMSD*Nord*.xls* | ForEach-Object FullName)`, and pass `$pun` and `$msd` in the same way. With `--game`, every solved day is appended to `game_ref_<year>_days.jsonl`, so an interrupted run restarts from the missing days. The whole-megawatt runs (`gran1`) reach the time limit of 300 s on most days, about 30 hours per composition and year. `comps_parallel.py` solves the days of the given compositions in parallel processes and keeps a checkpoint of the solved days, so that the same work takes a few hours on a multi-core workstation and an interrupted run resumes from the missing days. The SOC margins (`margin121`, `margin432`, `margin955`) add 1.21%, 4.32% and 9.55% of the capacity to the bounds of the sustain constraints in every hour and direction in which a unit holds reserve, and compute the threshold-free value of the small unit only, which gives the value of admission.
 
 All daily problems are solved to a relative gap of 0.01% within 300 s. The identical units of each class are merged into one unit of summed power and energy, which has the same value, since every constraint of a unit is homogeneous in its power and energy.
 
@@ -121,6 +127,7 @@ All daily problems are solved to a relative gap of 0.01% within 300 s. The ident
 | `post_ref.json` | Shapley value, nucleolus, core and single-unit core projections, largest excess of each rule, fixed-cost bounds, Monte Carlo replay |
 | `core_width_small_<year>.json` | Core interval of one small unit in every composition, in kEUR |
 | `comps_fcrdepth_<year>.json` | Class pools and their unions under the price-responsive FCR |
+| `comps_gran1_2023.json` | The twelve coalitions solved with aggregate offers in whole megawatts in 2023, and the whole portfolio |
 | `schedules_ref_<year>*.npz` | Hourly schedules and inputs of the reference runs, aggregated and standalone |
 | `summary_*.csv`, `durations_*.csv` | Timestamped outputs of the runs, merged into the two CSV files above |
 

@@ -1,0 +1,55 @@
+{
+ "(8, 8, 4)": {
+  "value": 5970190.0,
+  "tolerance": null
+ },
+ "(8, 8, 0)": {
+  "value": 3806260.0,
+  "tolerance": null
+ },
+ "(7, 8, 4)": {
+  "value": 5791170.0,
+  "tolerance": null
+ },
+ "(8, 7, 4)": {
+  "value": 5666800.0,
+  "tolerance": null
+ },
+ "(8, 8, 3)": {
+  "value": 5424050.0,
+  "tolerance": null
+ },
+ "(8, 0, 4)": {
+  "value": 3527770.0,
+  "tolerance": null
+ },
+ "(8, 0, 0)": {
+  "value": 1394270.0,
+  "tolerance": null
+ },
+ "(0, 8, 0)": {
+  "value": 2396970.0,
+  "tolerance": null
+ },
+ "(0, 0, 4)": {
+  "value": 2118330.0,
+  "tolerance": null
+ },
+ "(2, 0, 0)": {
+  "value": 342580.0,
+  "tolerance": null
+ },
+ "(1, 0, 1)": {
+  "value": 655840.0,
+  "tolerance": null
+ },
+ "(1, 0, 2)": {
+  "value": 1199280.0,
+  "tolerance": 11270.0
+ },
+ "(0, 8, 4)": {
+  "value": 4562770.0,
+  "tolerance": 20170.0
+ },
+ "_note": "Scenario gran1 (aggregate offers in whole MW), 2023, solved with experiments.py --comps and, for (1, 0, 2) and (0, 8, 4), also with comps_parallel.py, whose tolerances (sum over the days of the absolute gap) are reported; (8, 8, 4) is the aggregated run of units_gran1_2023.json. Values in EUR."
+}

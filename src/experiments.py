@@ -79,6 +79,11 @@ SCENARIOS = {
     #Lorenzo Giannuzzo: day-ahead schedule on persistence forecasts, settled at the actual prices
     "persist1":   dict(forecast=1),
     "persist7":   dict(forecast=7),
+    #Lorenzo Giannuzzo: SOC margins on the bounds of the sustain constraints (1.21%, 4.32% and 9.55% of the capacity),
+    # with the threshold-free value computed for the small unit only, which gives the value of admission
+    "margin121":  dict(opts=dict(soc_margin=0.0121), tf_classes=("small",)),
+    "margin432":  dict(opts=dict(soc_margin=0.0432), tf_classes=("small",)),
+    "margin955":  dict(opts=dict(soc_margin=0.0955), tf_classes=("small",)),
 }
 
 #Lorenzo Giannuzzo: from the preliminary formulation to the reference, one change at a time (cumulative)
@@ -275,7 +280,7 @@ def run_scenario(name, cfg, year, a, base_window, pooled_window):
         sa[label] = solve_year(u1, win, a.days, opts, forecast=fc, tag=f"{tag} standalone {label}",
                                dump=os.path.join(a.outdir, f"schedules_{name}_{year}_standalone_{label}.npz") if dumping else None)
         tf[label] = solve_year(u1, win, a.days, replace(opts, min_bid=0.0, granularity=0.0, uvam=None, fcr_depth_mw=0.0),
-                               forecast=fc, tag=f"{tag} threshold-free {label}") if not a.no_tf else None
+                               forecast=fc, tag=f"{tag} threshold-free {label}") if not a.no_tf and label in cfg.get("tf_classes", (label,)) else None
     units = make_units(N_TOT, repl)
     dump = os.path.join(a.outdir, f"schedules_{name}_{year}.npz") if dumping else None
     #Lorenzo Giannuzzo: the identical units of each class are merged (same value, see super_units), so that each
